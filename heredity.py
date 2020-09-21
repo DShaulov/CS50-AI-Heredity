@@ -139,6 +139,70 @@ def joint_probability(people, one_gene, two_genes, have_trait):
         * everyone in set `have_trait` has the trait, and
         * everyone not in set` have_trait` does not have the trait.
     """
+    print(people)
+    print(one_gene)
+    print(two_genes)
+    print(have_trait)
+
+    # calculate the probability that everyone in set 'one gene' has one copy of the gene
+    one_gene_probabilities = []
+    for person in one_gene:
+        # check who the parents of the person are
+        person_mother = people[person]['mother']
+        person_father = people[person]['father']
+
+        # if person has no parents, use the probability distribution PROBS['genes']
+        if person_father and person_mother == None:
+            one_gene_probabilities.append(PROBS['genes'][1])
+
+        # either person gets the gene from his mother and not his father
+        # or he gets it from his father and not his mother
+        if person_father in one_gene:
+            father_passing_probability = 0.49 # 0.5 - 0.01 (the probability of mutation to not the specified gene)
+        if person_father in two_genes:
+            father_passing_probability = 0.99 # 1 - 0.01 (the probability of mutation to not the specified gene)
+        else:
+            father_passing_probability = 0.01 # (the probability of not the specified gene mutating into the specified gene)
+
+
+        if person_mother in one_gene:
+            mother_passing_probability = 0.49 # 0.5 - 0.01 (the probability of mutation to not the specified gene)
+        if person_father in two_genes:
+            mother_passing_probability = 0.99 # 1 - 0.01 (the probability of mutation to not the specified gene)
+        else:
+            mother_passing_probability = 0.01 # (the probability of not the specified gene mutating into the specified gene)
+        
+        # probability = gets from mother and not father OR doesnt get from mother but gets from father
+        probability = mother_passing_probability * (1 - father_passing_probability) + (1 - mother_passing_probability) * father_passing_probability
+        # add the probability of person having one gene to the list of probabilities
+        one_gene_probabilities.append(probability)
+
+    two_genes_probabilities = []
+    for person in two_genes_probabilities:
+        # check who the parents of the person are
+        person_mother = people[person]['mother']
+        person_father = people[person]['father']
+
+        # if person has no parents, use the probability distribution PROBS['genes']
+        if person_father and person_mother == None:
+            two_genes_probabilities.append(PROBS['genes'][2])
+
+        # check probability of passing the gene by persons parents
+        if person_father in one_gene:
+            father_passing_probability = 0.49 # 0.5 - 0.01 (the probability of mutation to not the specified gene)
+        if person_father in two_genes:
+            father_passing_probability = 0.99 # 1 - 0.01 (the probability of mutation to not the specified gene)
+        else:
+            father_passing_probability = 0.01 # (the probability of not the specified gene mutating into the specified gene)
+
+
+        if person_mother in one_gene:
+            mother_passing_probability = 0.49 # 0.5 - 0.01 (the probability of mutation to not the specified gene)
+        if person_father in two_genes:
+            mother_passing_probability = 0.99 # 1 - 0.01 (the probability of mutation to not the specified gene)
+        else:
+            mother_passing_probability = 0.01 # (the probability of not the specified gene mutating into the specified gene)
+
     raise NotImplementedError
 
 
