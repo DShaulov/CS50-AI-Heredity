@@ -1,0 +1,8 @@
+Your program does not (CALCULATE?) the majority of cases where a gene/trait is present/absent in families with single/multiple children correctly. Do review the specification for how to calculate in all of these scenarios!
+
+- Something is wrong with the way i compute the joint probability?
+- I forgot to compute certain cases?
+
+Problem: Calculating the odds of Harry (child with known parents) incorrectly, parents are correct:
+- what calculations affect only harry?
+    - its wierd because it a joint probability and should affect everyone?
